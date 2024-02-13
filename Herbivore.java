@@ -1,3 +1,7 @@
-public class Herbivore {
-    
+
+
+
+public class Herbivore extends Organism {
+
+    Herbivore() {}
 }

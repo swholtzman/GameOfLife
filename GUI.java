@@ -1,3 +1,6 @@
+
+
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
@@ -5,8 +8,8 @@ import java.awt.event.KeyEvent;
 
 public class GUI extends JFrame {
 
-    static final int GRID_SIZE = 20;
-    static final int CELL_SIZE = 20;
+    static final int GRID_SIZE = World.GRID_SIZE;
+    static final int CELL_SIZE = World.CELL_SIZE;
 
     GUI() {
         setTitle("The Game of Life");
@@ -38,6 +41,8 @@ public class GUI extends JFrame {
         setLocationRelativeTo(null);
         setVisible(true);
     }
+
+    // public void setColour(){};
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new GUI());

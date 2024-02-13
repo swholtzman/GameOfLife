@@ -1,10 +1,15 @@
 
 
+
 public class Main {
     
-    GUI gui;
+    Game game;
+
+    Main() {
+        game = new Game();
+    }
 
     public static void main(String[] args) {
-        GUI gui = new GUI();
+        Main main = new Main();
     }
 }

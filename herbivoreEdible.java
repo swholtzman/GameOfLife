@@ -1,3 +1,6 @@
+
+
+
 interface herbivoreEdible {
     
 }
