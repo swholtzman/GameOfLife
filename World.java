@@ -1,5 +1,4 @@
-
-
+// import java.awt.Color;
 
 public class World {
 
@@ -9,27 +8,25 @@ public class World {
 
     public Cell cell;
 
+    private GUI gui;
+
     Herbivore herbivore;
     Plant plant;
-    // Cell cellArr[][] = new Cell[][];
+    Cell cellArr[][];
 
 
 
     World() {
-    
-        for (int i = 0; i < GRID_SIZE; i++) {
-            for (int j = 0; j < CELL_SIZE; j++) {
-              int randNum = RandomGenerator.nextNumber(99);
-                if (randNum >= 85) {
-                    cell = new Cell(herbivore);
-                    
-                } else if (randNum >= 65) {
-                    cell = new Cell(plant);
-
-                }
-            }
-        }
+        cellArr = new Cell[GRID_SIZE][CELL_SIZE];
 
     }
+
+    public void setCellType(int rowNum, int colNum, Organism organism) {
+        cellArr[rowNum][colNum] = new Cell(organism);
+    }
+
+    // public void setCellColor(int rowNum, int colNum, Color color) {
+    //     gui.setCellColor(rowNum, colNum, color);
+    // }
 
 }
