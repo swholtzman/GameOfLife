@@ -1,6 +1,4 @@
 
-
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
@@ -39,12 +37,11 @@ public class GUI {
         frame.add(gamePanel);
         frame.pack();
 
-
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int screenWidth = (int) screenSize.getWidth();
         int screenHeight = (int) screenSize.getHeight();
-        int frameWidth = (int) (screenWidth * (3.0/4.0));
-        int frameHeight = (int) (screenWidth * (3.0/4.0));
+        int frameWidth = (int) (screenWidth * (3.0 / 4.0));
+        int frameHeight = (int) (screenWidth * (3.0 / 4.0));
         frame.setSize(frameWidth, frameHeight);
 
         frame.setLocationRelativeTo(null);
@@ -59,11 +56,5 @@ public class GUI {
         // Set the background color
         cellPanel.setBackground(color);
     }
-
-    
-
-    // public static void main(String[] args) {
-    //     SwingUtilities.invokeLater(() -> new GUI());
-    // }
 
 }
