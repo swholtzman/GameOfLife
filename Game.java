@@ -6,7 +6,7 @@ public class Game {
     World world;
 
     Game() {
-        gui = new GUI();
+        gui = new GUI(this);
         world = new World();
         initializeWorld();
     }
@@ -32,5 +32,19 @@ public class Game {
             }
         }
     }
+
+    public World getWorld() {
+        return this.world;
+    }
+
+
+    public void advanceGame() {
+        // Step 1: Update the game state
+        world.updateOrganisms(); // Assuming this method updates the state of all cells
+        
+        // Step 2: Refresh the GUI based on the updated game state
+        gui.refreshDisplay();
+    }
+    
     
 }
