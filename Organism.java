@@ -1,5 +1,5 @@
 
-public class Organism {
+public abstract class Organism {
     boolean alive;
     int hunger;
 

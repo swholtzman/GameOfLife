@@ -12,6 +12,10 @@ public class Cell {
         return this.currentOccupant;
     }
 
+    public boolean getMoveStatus() {
+        return this.movedIntoThisTurn;
+    }
+
     public void setOccupant(Organism organism) {
         System.out.println("Changing occupant of cell [" + /* Provide row and col if available */ "] from "
                 + (this.currentOccupant == null ? "null" : this.currentOccupant.getClass().getSimpleName()) + " to "
@@ -29,7 +33,6 @@ public class Cell {
     }
 
     public void resetMovedIntoFlag() {
-        System.out.println("Resetting moved flag.");
         this.movedIntoThisTurn = false;
     }
 }

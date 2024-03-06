@@ -32,11 +32,13 @@ public class GUI {
         gamePanel.setLayout(new GridLayout(GRID_SIZE, GRID_SIZE));
 
         for (int i = 0; i < GRID_SIZE; i++) {
+
             for (int j = 0; j < GRID_SIZE; j++) {
                 JPanel cellPanel = new JPanel();
                 cellPanel.setPreferredSize(new Dimension(CELL_SIZE, CELL_SIZE));
                 cellPanel.setBorder(BorderFactory.createLineBorder(Color.GRAY));
                 gamePanel.add(cellPanel);
+
             }
         }
 
@@ -68,30 +70,36 @@ public class GUI {
 
     public void setupMouseListener() {
         gamePanel.addMouseListener(new MouseAdapter() {
+
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 game.advanceGame();
                 System.out.println("Panel Clicked");
+
             }
         });
     }
 
     public void refreshDisplay() {
         for (int i = 0; i < World.GRID_SIZE; i++) {
+
             for (int j = 0; j < World.CELL_SIZE; j++) {
                 String cellType = game.getWorld().getCellType(i, j); // Assuming getWorld() and getCellType() methods are implemented
                 Color color;
+
                 switch (cellType) {
                     case "Herbivore":
-                        color = GUI.GREEN;
-                        break;
-                    case "Plant":
                         color = GUI.YELLOW;
                         break;
+                    case "Plant":
+                        color = GUI.GREEN;
+                        break;
                     default:
-                        color = Color.WHITE; // Default color for empty or unknown cell types
+                        color = Color.WHITE; // Default color for empty or unknown cell type
+                        
                 }
+
                 setCellColor(i, j, color);
             }
         }
