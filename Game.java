@@ -20,12 +20,15 @@ public class Game {
 
                 if (randNum >= 85) {
                     world.setCellType(i, j, new Herbivore());
-                    gui.setCellColor(i, j, GUI.GREEN); 
+                    gui.setCellColor(i, j, GUI.YELLOW); 
 
                 } else if (randNum >= 65) {
                     world.setCellType(i, j, new Plant());
-                    gui.setCellColor(i, j, GUI.YELLOW); 
+                    gui.setCellColor(i, j, GUI.GREEN); 
 
+                } else {
+                    world.setCellType(i, j, null);
+                    gui.setCellColor(i, j, GUI.LIGHT_BROWN); 
                 }
             }
         }

@@ -57,6 +57,7 @@ public class Herbivore extends Organism {
         // Optionally, log the move for debugging
         System.out.println("Moved Herbivore from [" + currentRow + "," + currentCol + "] to [" + selectedMove[0] + "," + selectedMove[1] + "]");
     }
+    currentCell.setJustVacatedByHerbivore(true);
 }
 
 

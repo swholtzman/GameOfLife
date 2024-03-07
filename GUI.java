@@ -17,6 +17,7 @@ public class GUI {
 
     static final Color GREEN = Color.GREEN;
     static final Color YELLOW = Color.YELLOW;
+    static final Color LIGHT_BROWN = new Color(210, 180, 140);
 
     private JPanel gamePanel;
 
@@ -96,7 +97,7 @@ public class GUI {
                         color = GUI.GREEN;
                         break;
                     default:
-                        color = Color.WHITE; // Default color for empty or unknown cell type
+                        color = LIGHT_BROWN; // Default color for empty or unknown cell type
                         
                 }
 

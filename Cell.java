@@ -2,6 +2,7 @@
 public class Cell {
     private Organism currentOccupant;
     private boolean movedIntoThisTurn;
+    private boolean justVacatedByHerbivore;
 
     public Cell(Organism organism) {
         this.currentOccupant = organism;
@@ -34,5 +35,13 @@ public class Cell {
 
     public void resetMovedIntoFlag() {
         this.movedIntoThisTurn = false;
+    }
+
+    public boolean wasJustVacatedByHerbivore() {
+        return justVacatedByHerbivore;
+    }
+
+    public void setJustVacatedByHerbivore(boolean justVacated) {
+        this.justVacatedByHerbivore = justVacated;
     }
 }

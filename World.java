@@ -33,7 +33,13 @@ public class World {
     }
 
     public void updateOrganisms() {
-        // Loop through all cells to update organisms
+        resetHerbivoreMovementFlags(); // Reset only the just vacated flags here
+        updateHerbivores();
+        seedPlants();
+        resetMovementFlags(); // Reset all move flags here
+    }
+
+    private void updateHerbivores() {
         for (int i = 0; i < GRID_SIZE; i++) {
 
             for (int j = 0; j < CELL_SIZE; j++) {
@@ -41,31 +47,42 @@ public class World {
                 Organism occupant = cell.getOccupant();
 
                 if (occupant instanceof Herbivore && !cell.isMarked()) {
-                    // cell.markAsMoved();
                     Herbivore herbivore = (Herbivore) occupant;
-                    herbivore.hungerLevel(); // Update the hunger level
+                    herbivore.hungerLevel(); 
 
                     if (!herbivore.alive) {
-                        cell.setOccupant(null); // Remove the herbivore if it's no longer alive
+                        // remove dead herbivore
+                        cell.setOccupant(null);
                     }
                 }
             }
         }
         for (int i = 0; i < GRID_SIZE; i++) {
+
             for (int j = 0; j < CELL_SIZE; j++) {
                 Cell cell = cellArr[i][j];
+
                 if (!cell.isMarked()) {
                     Organism occupant = cell.getOccupant();
+
                     if (occupant instanceof Herbivore) {
                         Herbivore herbivore = (Herbivore) occupant;
+
                         if (herbivore.alive) {
                             attemptMoveHerbivore(i, j);
                         }
-                    } 
+                    }
                 }
             }
         }
-        resetMovementFlags();
+    }
+
+    private void resetHerbivoreMovementFlags() {
+        for (int i = 0; i < GRID_SIZE; i++) {
+            for (int j = 0; j < CELL_SIZE; j++) {
+                cellArr[i][j].setJustVacatedByHerbivore(false);
+            }
+        }
     }
 
     public String getCellType(int i, int j) {
@@ -94,21 +111,21 @@ public class World {
 
     private List<int[]> calculatePossibleMoves(int currentRow, int currentCol) {
         List<int[]> possibleMoves = new ArrayList<>();
-        int[][] directions = { {-1, -1}, {-1, 0}, {-1, 1}, {0, -1}, {0, 1}, {1, -1}, {1, 0}, {1, 1} };
-    
+        int[][] directions = { { -1, -1 }, { -1, 0 }, { -1, 1 }, { 0, -1 }, { 0, 1 }, { 1, -1 }, { 1, 0 }, { 1, 1 } };
+
         for (int[] dir : directions) {
             int newRow = currentRow + dir[0];
             int newCol = currentCol + dir[1];
             if (newRow >= 0 && newRow < GRID_SIZE && newCol >= 0 && newCol < CELL_SIZE) {
                 Cell potentialCell = cellArr[newRow][newCol];
-                if (!potentialCell.isMarked() && (potentialCell.getOccupant() == null || potentialCell.getOccupant() instanceof Plant)) {
-                    possibleMoves.add(new int[] {newRow, newCol});
+                if (!potentialCell.isMarked()
+                        && (potentialCell.getOccupant() == null || potentialCell.getOccupant() instanceof Plant)) {
+                    possibleMoves.add(new int[] { newRow, newCol });
                 }
             }
         }
         return possibleMoves;
     }
-    
 
     public Cell[][] getCellArr() {
         return this.cellArr;
@@ -126,6 +143,57 @@ public class World {
         }
     }
 
-    // private List<int[]> calculatePlantsList
+    private void seedPlants() {
+        for (int i = 0; i < GRID_SIZE; i++) {
+
+            for (int j = 0; j < CELL_SIZE; j++) {
+                Cell cell = cellArr[i][j];
+                Organism occupant = cell.getOccupant();
+
+                if (occupant instanceof Plant && !cell.isMarked()) {
+                    ((Plant) occupant).seed(i, j, this);
+                }
+            }
+        }
+    }
+
+    public List<int[]> calculatePossibleSeeds(int currentRow, int currentCol) {
+        List<int[]> possibleSeeds = new ArrayList<>();
+        int[][] directions = { { -1, -1 }, { -1, 0 }, { -1, 1 }, { 0, -1 }, { 0, 1 }, { 1, -1 }, { 1, 0 }, { 1, 1 } };
+
+        for (int[] dir : directions) {
+            int newRow = currentRow + dir[0];
+            int newCol = currentCol + dir[1];
+
+            if (newRow >= 0 && newRow < GRID_SIZE && newCol >= 0 && newCol < CELL_SIZE) {
+                Cell potentialCell = cellArr[newRow][newCol];
+
+                if (potentialCell.getOccupant() == null && !potentialCell.isMarked()) {
+                    possibleSeeds.add(new int[] { newRow, newCol });
+                }
+            }
+        }
+        return possibleSeeds;
+    }
+
+    public boolean hasFourPlants(int currentRow, int currentCol) {
+        int[][] directions = { { -1, -1 }, { -1, 0 }, { -1, 1 }, { 0, -1 }, { 0, 1 }, { 1, -1 }, { 1, 0 }, { 1, 1 } };
+        int plantCount = 0;
+
+        for (int[] dir : directions) {
+            int newRow = currentRow + dir[0];
+            int newCol = currentCol + dir[1];
+            if (newRow >= 0 && newRow < GRID_SIZE && newCol >= 0 && newCol < CELL_SIZE) {
+                Cell potentialCell = cellArr[newRow][newCol];
+                if (potentialCell.getOccupant() instanceof Plant) {
+                    plantCount++;
+                }
+            }
+        }
+
+        return plantCount == 4;
+    }
+
+    
 
 }
