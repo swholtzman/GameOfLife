@@ -7,7 +7,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-// implements MouseListener
+/**
+ * Provides the graphical user interface for the Game of Life simulation.
+ */
 public class GUI {
 
     JFrame frame = new JFrame();
@@ -23,6 +25,11 @@ public class GUI {
 
     private Game game;
 
+    /**
+     * Constructs the GUI for the game.
+     * 
+     * @param game The game instance to be associated with this GUI.
+     */
     GUI(Game game) {
         this.game = game;
 
@@ -60,6 +67,13 @@ public class GUI {
 
     }
 
+    /**
+     * Sets the color of a specific cell in the grid based on its state.
+     * 
+     * @param rowNum The row number of the cell.
+     * @param colNum The column number of the cell.
+     * @param color  The color to set the cell.
+     */
     public void setCellColor(int rowNum, int colNum, Color color) {
         // Get the index of the cell panel based on row and column numbers
         int cellIndex = rowNum * GRID_SIZE + colNum;
@@ -69,6 +83,10 @@ public class GUI {
         cellPanel.setBackground(color);
     }
 
+    /**
+     * Sets up a mouse listener for the game panel to detect clicks and advance the
+     * game state.
+     */
     public void setupMouseListener() {
         gamePanel.addMouseListener(new MouseAdapter() {
 
@@ -82,11 +100,15 @@ public class GUI {
         });
     }
 
+    /**
+     * Refreshes the display to reflect the current state of the game world.
+     */
     public void refreshDisplay() {
         for (int i = 0; i < World.GRID_SIZE; i++) {
 
             for (int j = 0; j < World.CELL_SIZE; j++) {
-                String cellType = game.getWorld().getCellType(i, j); // Assuming getWorld() and getCellType() methods are implemented
+                String cellType = game.getWorld().getCellType(i, j); // Assuming getWorld() and getCellType() methods
+                                                                     // are implemented
                 Color color;
 
                 switch (cellType) {
@@ -98,13 +120,12 @@ public class GUI {
                         break;
                     default:
                         color = LIGHT_BROWN; // Default color for empty or unknown cell type
-                        
+
                 }
 
                 setCellColor(i, j, color);
             }
         }
     }
-    
 
 }
