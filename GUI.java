@@ -94,7 +94,7 @@ public class GUI {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 game.advanceGame();
-                System.out.println("Panel Clicked");
+                // System.out.println("Panel Clicked");
 
             }
         });

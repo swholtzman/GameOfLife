@@ -193,7 +193,7 @@ public class World {
      * movements have been processed to prepare the cells for the next update cycle.
      */
     public void resetMovementFlags() {
-        System.out.println("Resetting movement flags for all cells.");
+        // System.out.println("Resetting movement flags for all cells.");
 
         for (int i = 0; i < GRID_SIZE; i++) {
 
