@@ -2,10 +2,9 @@ import java.util.List;
 
 /**
  * Represents a Plant organism in the Game of Life simulation. Plants can seed
- * new plants
- * under certain conditions. This class extends the abstract Organism class and
- * implements
- * the herbivoreEdible interface, indicating that it can be eaten by herbivores.
+ * new plants under certain conditions. This class extends the abstract Organism
+ * class and implements the herbivoreEdible interface, indicating that it can be
+ * eaten by herbivores.
  */
 public class Plant extends Organism implements herbivoreEdible {
 

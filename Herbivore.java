@@ -57,13 +57,11 @@ public class Herbivore extends Organism {
 
     /**
      * Moves the Herbivore to a new cell chosen from a list of possible moves. The
-     * move is determined
-     * randomly from the provided list. If the target cell contains a plant, the
-     * Herbivore eats the
-     * plant and resets its hunger level. This method also handles the logistics of
-     * moving the Herbivore
-     * from its current cell to the new cell, including marking the cells as moved
-     * into or vacated.
+     * move is determined randomly from the provided list. If the target cell
+     * contains a plant, the Herbivore eats the plant and resets its hunger level.
+     * This method also handles the logistics of moving the Herbivore from its
+     * current cell to the new cell, including marking the cells as moved into o
+     *  vacated.
      * 
      * @param possibleMoves A list of integer arrays representing possible new
      *                      positions for the Herbivore.

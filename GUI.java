@@ -79,7 +79,6 @@ public class GUI {
         int cellIndex = rowNum * GRID_SIZE + colNum;
         // Get the panel at that index
         JPanel cellPanel = (JPanel) gamePanel.getComponent(cellIndex);
-        // Set the background color
         cellPanel.setBackground(color);
     }
 
@@ -107,8 +106,8 @@ public class GUI {
         for (int i = 0; i < World.GRID_SIZE; i++) {
 
             for (int j = 0; j < World.CELL_SIZE; j++) {
-                String cellType = game.getWorld().getCellType(i, j); // Assuming getWorld() and getCellType() methods
-                                                                     // are implemented
+                String cellType = game.getWorld().getCellType(i, j); 
+                                                                    
                 Color color;
 
                 switch (cellType) {
