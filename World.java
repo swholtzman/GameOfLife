@@ -53,6 +53,7 @@ public class World {
         updateHerbivores();
         seedPlants();
         resetMovementFlags(); // Reset all move flags here
+        Game.turns++;
     }
 
     /**

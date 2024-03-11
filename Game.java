@@ -3,6 +3,8 @@
  * Represents the game logic and state for the Game of Life simulation.
  */
 public class Game {
+    public static int turns;
+
     GUI gui;
     World world;
 
