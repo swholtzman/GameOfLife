@@ -5,7 +5,7 @@ import java.util.List;
  * can move,
  * eat plants, and die of hunger.
  */
-public class Herbivore extends Organism {
+public class Herbivore extends Organism implements carnivoreEdible, omnivoreEdible {
 
     /**
      * Constructs a Herbivore with initial alive status set to true and hunger level
