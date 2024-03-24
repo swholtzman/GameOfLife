@@ -15,7 +15,7 @@ public class GUI {
     JFrame frame = new JFrame();
 
     static final int GRID_SIZE = World.GRID_SIZE;
-    static final int CELL_SIZE = World.CELL_SIZE;
+    static final int CELL_SIZE = World.GRID_SIZE;
 
     static final Color GREEN = Color.GREEN;
     static final Color YELLOW = Color.YELLOW;
@@ -104,24 +104,9 @@ public class GUI {
      */
     public void refreshDisplay() {
         for (int i = 0; i < World.GRID_SIZE; i++) {
-
-            for (int j = 0; j < World.CELL_SIZE; j++) {
-                String cellType = game.getWorld().getCellType(i, j); 
-                                                                    
-                Color color;
-
-                switch (cellType) {
-                    case "Herbivore":
-                        color = GUI.YELLOW;
-                        break;
-                    case "Plant":
-                        color = GUI.GREEN;
-                        break;
-                    default:
-                        color = LIGHT_BROWN; // Default color for empty or unknown cell type
-
-                }
-
+            for (int j = 0; j < World.GRID_SIZE; j++) {
+                Organism occupant = game.getWorld().getCellOccupant(i, j);
+                Color color = (occupant != null) ? occupant.getColor() : GUI.LIGHT_BROWN;
                 setCellColor(i, j, color);
             }
         }

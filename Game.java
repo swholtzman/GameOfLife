@@ -26,19 +26,19 @@ public class Game {
 
         for (int i = 0; i < World.GRID_SIZE; i++) {
 
-            for (int j = 0; j < World.CELL_SIZE; j++) {
+            for (int j = 0; j < World.GRID_SIZE; j++) {
                 int randNum = RandomGenerator.nextNumber(99);
 
                 if (randNum >= 85) {
-                    world.setCellType(i, j, new Herbivore());
+                    world.setCellOccupant(i, j, new Herbivore());
                     gui.setCellColor(i, j, GUI.YELLOW);
 
                 } else if (randNum >= 65) {
-                    world.setCellType(i, j, new Plant());
+                    world.setCellOccupant(i, j, new Plant());
                     gui.setCellColor(i, j, GUI.GREEN);
 
                 } else {
-                    world.setCellType(i, j, null);
+                    world.setCellOccupant(i, j, null);
                     gui.setCellColor(i, j, GUI.LIGHT_BROWN);
                 }
             }
@@ -60,11 +60,12 @@ public class Game {
      * world and refreshing the GUI.
      */
     public void advanceGame() {
-        // Step 1: Update the game state
-        world.updateOrganisms();
-
-        // Step 2: Refresh the GUI based on the updated game state
-        gui.refreshDisplay();
+        world.advanceGame(); // Advances all organisms in the world
+    
+        turns++; // Increment turn counter
+    
+        gui.refreshDisplay(); // Refresh GUI to reflect the new state
     }
+    
 
 }

@@ -1,45 +1,49 @@
 import java.util.List;
+import java.util.stream.Collectors;
+import java.awt.Color;
 
-/**
- * Represents a Plant organism in the Game of Life simulation. Plants can seed
- * new plants under certain conditions. This class extends the abstract Organism
- * class and implements the herbivoreEdible interface, indicating that it can be
- * eaten by herbivores.
- */
+
 public class Plant extends Organism implements herbivoreEdible {
 
-    /**
-     * Constructs a Plant with default properties.
-     */
     public Plant() {
+        super(); 
     }
 
-    /**
-     * Attempts to seed a new plant in the surrounding area based on the current
-     * position in the world. This method calculates possible seeding locations and
-     * seeds a new plant.
-     * 
-     * @param currentRow The row index of the plant attempting to seed.
-     * @param currentCol The column index of the plant attempting to seed.
-     * @param world      The world in which the plant exists and attempts to seed
-     *                   new plants.
-     */
-    public void seed(int currentRow, int currentCol, World world) {
-        List<int[]> possibleSeeds = world.calculatePossibleSeeds(currentRow, currentCol);
+    @Override
+    public void move(World world) {
+    }
 
-        if (possibleSeeds.size() >= 3 && world.hasFourPlants(currentRow, currentCol)) {
-            int index = RandomGenerator.nextNumber(possibleSeeds.size());
-            int[] selectedSeed = possibleSeeds.get(index);
-
-            Cell targetCell = world.getCellArr()[selectedSeed[0]][selectedSeed[1]];
-
-            // Check the new flag before seeding
-            if (!targetCell.wasJustVacatedByHerbivore()) {
-                targetCell.setOccupant(new Plant());
-                // System.out.println("Plant seeded at: " + selectedSeed[0] + "," +
-                // selectedSeed[1]);
-            }
+    @Override
+    public void reproduce(World world) {
+        int[] location = world.findOrganism(this);
+        if (location == null) {
+            return;
+        }
+    
+        int currentRow = location[0], currentCol = location[1];
+        List<Cell> neighbors = world.getNeighboringCells(currentRow, currentCol);
+    
+        // Directly count neighboring plants and empty cells here
+        long neighboringPlants = neighbors.stream().filter(cell -> cell.getOccupant() instanceof Plant).count();
+        List<Cell> emptyNeighbors = neighbors.stream().filter(cell -> cell.getOccupant() == null).collect(Collectors.toList());
+    
+        if (emptyNeighbors.size() >= 3 && neighboringPlants == 4) {
+            int index = RandomGenerator.nextNumber(emptyNeighbors.size());
+            Cell targetCell = emptyNeighbors.get(index);
+            targetCell.setOccupant(new Plant());
         }
     }
 
+    private boolean hasFourPlants(List<Cell> neighbors) {
+        long plantCount = neighbors.stream()
+                .filter(cell -> cell.getOccupant() instanceof Plant)
+                .count();
+
+        return plantCount == 4;
+    }
+
+    @Override
+    public Color getColor() {
+        return GUI.GREEN;
+    }
 }

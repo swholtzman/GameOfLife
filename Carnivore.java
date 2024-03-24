@@ -1,3 +1,3 @@
-public class Carnivore extends Organism implements omnivoreEdible {
+// public class Carnivore extends Organism implements omnivoreEdible {
     
-}
+// }
