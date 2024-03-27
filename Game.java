@@ -27,7 +27,7 @@ public class Game {
         for (int i = 0; i < World.GRID_SIZE; i++) {
 
             for (int j = 0; j < World.GRID_SIZE; j++) {
-                int randNum = RandomGenerator.nextNumber(99);
+                int randNum = RandomGenerator.nextNumber(100);
 
                 if (randNum >= 85) {
                     world.setCellOccupant(i, j, new Herbivore());

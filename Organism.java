@@ -39,5 +39,8 @@ public abstract class Organism {
 
 
     public abstract Color getColor();
+
+
+    public abstract boolean getLifeStatus();
 }
 

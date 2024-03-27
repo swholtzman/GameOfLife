@@ -1,3 +1,4 @@
+// GUI.java
 
 import javax.swing.*;
 import java.awt.*;
@@ -44,7 +45,7 @@ public class GUI {
             for (int j = 0; j < GRID_SIZE; j++) {
                 JPanel cellPanel = new JPanel();
                 cellPanel.setPreferredSize(new Dimension(CELL_SIZE, CELL_SIZE));
-                cellPanel.setBorder(BorderFactory.createLineBorder(Color.GRAY));
+                cellPanel.setBorder(BorderFactory.createLineBorder(Color.WHITE));
                 gamePanel.add(cellPanel);
 
             }
@@ -93,10 +94,25 @@ public class GUI {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 game.advanceGame();
-                // System.out.println("Panel Clicked");
+                clearDead();
+                refreshDisplay();
 
             }
         });
+    }
+
+    public void clearDead() {
+
+        for (int i = 0; i < World.GRID_SIZE; i++) {
+            for (int j = 0; j < World.GRID_SIZE; j++) {
+                Organism occupant = game.getWorld().getCellOccupant(i, j);
+
+                if (occupant == null)  {
+                    // System.out.println("cell is null");
+                    setCellColor(i, j, LIGHT_BROWN);
+                }
+            }
+        }
     }
 
     /**

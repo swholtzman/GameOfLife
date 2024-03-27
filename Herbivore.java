@@ -12,6 +12,7 @@ public class Herbivore extends Organism implements carnivoreEdible, omnivoreEdib
 
     @Override
     public void move(World world) {
+        hunger++;
         if (!this.alive) return;
 
         int[] location = world.findOrganism(this);
@@ -23,13 +24,15 @@ public class Herbivore extends Organism implements carnivoreEdible, omnivoreEdib
             int moveIndex = RandomGenerator.nextNumber(possibleMoves.size());
             int[] moveTo = possibleMoves.get(moveIndex);
 
-            world.moveOrganism(this, moveTo[0], moveTo[1]);
             this.eat(world.getCellOccupant(moveTo[0], moveTo[1]));
+            world.moveOrganism(this, moveTo[0], moveTo[1]);
+            
 
             // Increase hunger after moving
-            this.hunger++;
-            if (this.hunger > MAX_HUNGER) {
+            
+            if (hunger == MAX_HUNGER) {
                 this.alive = false;
+                
             }
         }
     }
@@ -41,8 +44,13 @@ public class Herbivore extends Organism implements carnivoreEdible, omnivoreEdib
 
     private void eat(Organism organism) {
         if (organism instanceof herbivoreEdible) {
+            
             this.hunger = 0; // Reset hunger if the organism eaten is edible by a herbivore.
         }
+    }
+
+    public boolean getLifeStatus() {
+        return alive;
     }
 
     @Override
