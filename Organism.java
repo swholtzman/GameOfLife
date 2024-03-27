@@ -1,3 +1,4 @@
+// Organism.java
 
 import java.awt.Color;
 
@@ -26,7 +27,7 @@ public abstract class Organism {
      *
      * @param world The world in which the organism exists. This provides the context needed for movement.
      */
-    public abstract void move(World world);
+    public abstract void move( World world );
 
     /**
      * Represents the organism's ability to reproduce. Different organisms will
@@ -35,12 +36,18 @@ public abstract class Organism {
      *
      * @param world The world in which the organism exists. This provides the context needed for reproduction.
      */
-    public abstract void reproduce(World world);
+    public abstract void reproduce( World world );
 
 
+    /*
+     * Abstract method for each Organism to "get" their colour when requested.
+     */
     public abstract Color getColor();
 
 
+    /*
+     * Abstract method to return the status of whether or not an organism is alive.
+     */
     public abstract boolean getLifeStatus();
 }
 

@@ -1,3 +1,4 @@
+// Main.java
 
 /**
  * The entry point of the Game of Life simulation.
