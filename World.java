@@ -86,23 +86,38 @@ public class World {
                 .collect(Collectors.toList());
     }
 
-    public List<int[]> getPossibleMoves(int row, int col) {
+    public List<int[]> getAllPossibleMoves(int row, int col) {
         List<int[]> possibleMoves = new ArrayList<>();
-        int[][] directions = { { -1, -1 }, { -1, 0 }, { -1, 1 }, { 0, -1 }, { 0, 1 }, { 1, -1 }, { 1, 0 }, { 1, 1 } };
-
+        int[][] directions = { {-1, -1}, {-1, 0}, {-1, 1}, {0, -1}, {0, 1}, {1, -1}, {1, 0}, {1, 1} };
+    
         for (int[] dir : directions) {
             int newRow = row + dir[0];
             int newCol = col + dir[1];
             if (newRow >= 0 && newRow < GRID_SIZE && newCol >= 0 && newCol < GRID_SIZE) {
-                Cell potentialCell = cells[newRow][newCol];
-                if (potentialCell.getOccupant() == null || potentialCell.getOccupant() instanceof herbivoreEdible) {
-                    possibleMoves.add(new int[] { newRow, newCol });
-                }
+                possibleMoves.add(new int[]{newRow, newCol});
             }
         }
-
         return possibleMoves;
     }
+    
+
+    // public List<int[]> getPossibleMoves(int row, int col) {
+    //     List<int[]> possibleMoves = new ArrayList<>();
+    //     int[][] directions = { { -1, -1 }, { -1, 0 }, { -1, 1 }, { 0, -1 }, { 0, 1 }, { 1, -1 }, { 1, 0 }, { 1, 1 } };
+
+    //     for (int[] dir : directions) {
+    //         int newRow = row + dir[0];
+    //         int newCol = col + dir[1];
+    //         if (newRow >= 0 && newRow < GRID_SIZE && newCol >= 0 && newCol < GRID_SIZE) {
+    //             Cell potentialCell = cells[newRow][newCol];
+    //             if (potentialCell.getOccupant() == null || potentialCell.getOccupant() instanceof herbivoreEdible) {
+    //                 possibleMoves.add(new int[] { newRow, newCol });
+    //             }
+    //         }
+    //     }
+
+    //     return possibleMoves;
+    // }
 
     public int[] getDirectionForCell(Cell targetCell, int currentRow, int currentCol) {
         for (int dRow = -1; dRow <= 1; dRow++) {
