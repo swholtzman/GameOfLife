@@ -1,1 +1,3 @@
+// omnivoreEdible.java
+
 interface omnivoreEdible {}
