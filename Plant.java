@@ -57,9 +57,9 @@ public class Plant extends Organism implements herbivoreEdible, omnivoreEdible {
         int currentCol = location[1];
 
         List<Cell> emptyNeighbors = world.getEmptyNeighboringCells(currentRow, currentCol);
-        List<Cell> neighboringPlants = world.getNeighboringCellsOfType(currentRow, currentCol, Plant.class);
+        List<Cell> friends = world.getNeighboringCellsOfType(currentRow, currentCol, Plant.class);
 
-        if (!emptyNeighbors.isEmpty() && emptyNeighbors.size() >= 3 && neighboringPlants.size() >= 2) {
+        if (!emptyNeighbors.isEmpty() && emptyNeighbors.size() >= 3 && friends.size() >= 2) {
 
             int index = RandomGenerator.nextNumber(emptyNeighbors.size());
             Cell targetCell = emptyNeighbors.get(index);

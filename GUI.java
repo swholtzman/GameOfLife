@@ -94,6 +94,7 @@ public class GUI {
                 clearDead();
                 refreshDisplay();
 
+                frame.setTitle("The Game of Life - Turn: " + Game.turns);
             }
         });
     }
