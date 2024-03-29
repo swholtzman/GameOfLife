@@ -2,17 +2,19 @@
 
 Welcome to **GameOfLife**, a captivating Java game 🎮 that simulates a dynamic environment bustling with various life forms. Dive into a world where plants, herbivores, carnivores, and omnivores coexist, interact, and strive for survival 🌱🦁. This project leverages the power of Java and JavaFX to create an immersive visualization of life’s interactions. Whether you're fascinated by biology, software simulation, or the intricate dance of ecosystems, **GameOfLife** offers a window into the fundamental interactions of life itself.
 
+
 ## Features 🚀
 
 **GameOfLife** is packed with features that offer a rich simulation experience:
 
 - **JavaFX Board Visualization**: A vibrant and responsive GUI that brings the game world to life, making every interaction tangible. 🖥️
-- **Dynamic Ecosystem Simulation**: Watch as life forms interact within their environment, with behaviors including feeding, moving, and reproducing. 🌎
+- **Dynamic Ecosystem Simulation**: Watch as life forms interact within their environment, with behaviours including feeding, moving, and reproducing. 🌎
 - **Diverse Organism Interactions**: From the predatory pursuits of carnivores to the simple existence of plants, each organism plays a crucial role in the ecosystem's balance. 🔍
+- **Real-time Simulation**: Step through the simulation at your own pace, allowing for detailed observation. ⏯️
 
 #### Features to be Added:
 - **Customizable World Parameters**: Tailor the simulation to your liking by adjusting world parameters, offering endless possibilities for exploration. ⚙️
-- **Real-time Simulation Controls**: Pause, resume, and step through the simulation in real-time, allowing for detailed observation and study. ⏯️
+
 
 ## Getting Started 🏁
 
@@ -22,6 +24,7 @@ To dive into the **GameOfLife**, you'll need:
 - A compatible IDE like IntelliJ IDEA, VSCode, or Eclipse. 🛠️
 
 Clone this repository, open it in your IDE, and run `Main.java` to start the simulation.
+
 
 ## Contribution 👥
 
@@ -38,6 +41,7 @@ Clone this repository, open it in your IDE, and run `Main.java` to start the sim
 3. Commit your changes (`git commit -am 'Add some amazing feature'`). ✨
 4. Push to the branch (`git push origin feature/amazing-feature`). 📤
 5. Open a Pull Request. 📬
+
 
 ## Acknowledgments 💖
 
