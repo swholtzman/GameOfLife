@@ -1,6 +1,6 @@
 # GameOfLife 🌍
 
-Welcome to **GameOfLife**, a captivating Java game 🎮 that simulates a dynamic environment bustling with various life forms. Dive into a world where plants, herbivores, carnivores, and omnivores coexist, interact, and strive for survival 🌱🦁. This project leverages the power of Java and JavaFX to create an immersive visualization of life’s interactions. Whether you're fascinated by biology, software simulation, or the intricate dance of ecosystems, **GameOfLife** offers a window into the fundamental interactions of life itself.
+Welcome to **GameOfLife**, a Java game 🎮 that simulates a dynamic environment filled with various life forms. Dive into a world where plants, herbivores, carnivores, and omnivores coexist, interact, and battle for survival 🌱🦁. This project uses Java and JavaFX to visualize life’s interactions. Whether you're fascinated by biology, software simulation, or the intricate dance of ecosystems, **GameOfLife** offers a view into the interactions of life that allow for an ecosystem to thrive. 
 
 
 ## Features 🚀
@@ -32,20 +32,21 @@ Clone this repository, open it in your IDE, and run `Main.java` to start the sim
 
 - **Bug Reports**: Notice something amiss? File a bug report to help us improve. 🐛
 - **Feature Requests**: Got an idea that could make **GameOfLife** even more exciting? We're all ears! 💡
-- **Documentation Improvements**: Help make our documentation even more user-friendly for explorers of all backgrounds. 📚
+- **Documentation Improvements**: Help make our documentation even more user-friendly. 📚
 
 ### Submitting Pull Requests
 
 1. Fork the repository. 🍴
-2. Create a new branch for your feature (`git checkout -b feature/amazing-feature`). 🌿
-3. Commit your changes (`git commit -am 'Add some amazing feature'`). ✨
-4. Push to the branch (`git push origin feature/amazing-feature`). 📤
+2. Create a new branch for your feature (`git checkout -b feature/your-new-feature`). 🌿
+3. Commit your changes (`git commit -am 'Add your new feature'`). ✨
+4. Push to the branch (`git push origin feature/your-new-feature`). 📤
 5. Open a Pull Request. 📬
 
 
 ## Acknowledgments 💖
 
-- The resilient Java community for continuous inspiration.
-- Contributors who share our passion for discovery and innovation.
+- The Java community for continuous inspiration.
+- My fellow BCIT CST students for their collaborations.
+- Dennis Richards for his support and guidance.
 
 Step into **GameOfLife** and unleash your curiosity as you navigate life’s great tapestry! 🌈
