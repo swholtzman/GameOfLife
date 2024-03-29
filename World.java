@@ -17,11 +17,11 @@ public class World {
      */
     World() {
 
-        for ( int i = 0; i < GRID_SIZE; i++ ) {
+        for (int i = 0; i < GRID_SIZE; i++) {
 
-            for ( int j = 0; j < GRID_SIZE; j++ ) {
+            for (int j = 0; j < GRID_SIZE; j++) {
 
-                cells[i][j] = new Cell( null );
+                cells[i][j] = new Cell(null);
             }
         }
     }
@@ -34,13 +34,13 @@ public class World {
      *         found, null otherwise.
      */
 
-    public int[] findOrganism( Organism organism ) {
+    public int[] findOrganism(Organism organism) {
 
-        for ( int i = 0; i < GRID_SIZE; i++ ) {
+        for (int i = 0; i < GRID_SIZE; i++) {
 
-            for ( int j = 0; j < GRID_SIZE; j++ ) {
+            for (int j = 0; j < GRID_SIZE; j++) {
 
-                if ( getCellOccupant(i, j) == organism ) {
+                if (getCellOccupant(i, j) == organism) {
 
                     return new int[] { i, j };
                 }
@@ -61,13 +61,13 @@ public class World {
 
         organisms.clear();
 
-        for ( Cell[] row : cells ) {
+        for (Cell[] row : cells) {
 
-            for ( Cell cell : row ) {
+            for (Cell cell : row) {
 
-                if ( cell.getOccupant() != null ) {
+                if (cell.getOccupant() != null) {
 
-                    organisms.add( cell.getOccupant() );
+                    organisms.add(cell.getOccupant());
 
                 }
             }
@@ -82,8 +82,8 @@ public class World {
      * @param organism The new occupant of the cell. Pass null to clear the cell's
      *                 occupant.
      */
-    public void setCellOccupant( int rowNum, int colNum, Organism organism ) {
-        cells[rowNum][colNum].setOccupant( organism );
+    public void setCellOccupant(int rowNum, int colNum, Organism organism) {
+        cells[rowNum][colNum].setOccupant(organism);
     }
 
     /**
@@ -94,7 +94,7 @@ public class World {
      * @return The Organism occupying the specified cell, or null if the cell is
      *         empty.
      */
-    public Organism getCellOccupant( int row, int col ) {
+    public Organism getCellOccupant(int row, int col) {
         return cells[row][col].getOccupant();
     }
 
@@ -105,16 +105,16 @@ public class World {
      * @param newRow   The row index of the destination cell.
      * @param newCol   The column index of the destination cell.
      */
-    public void moveOrganism( Organism organism, int newRow, int newCol ) {
+    public void moveOrganism(Organism organism, int newRow, int newCol) {
 
-        for ( int i = 0; i < GRID_SIZE; i++ ) {
+        for (int i = 0; i < GRID_SIZE; i++) {
 
-            for ( int j = 0; j < GRID_SIZE; j++ ) {
+            for (int j = 0; j < GRID_SIZE; j++) {
 
-                if ( cells[i][j].getOccupant() == organism ) {
-                    
-                    cells[i][j].setOccupant( null );
-                    cells[newRow][newCol].setOccupant( organism );
+                if (cells[i][j].getOccupant() == organism) {
+
+                    cells[i][j].setOccupant(null);
+                    cells[newRow][newCol].setOccupant(organism);
 
                     return;
                 }
@@ -130,16 +130,16 @@ public class World {
      * @return A list of Cell objects that are direct neighbors of the specified
      *         cell.
      */
-    public List<Cell> getNeighboringCells( int row, int col ) {
+    public List<Cell> getNeighboringCells(int row, int col) {
         List<Cell> neighbors = new ArrayList<>();
         int[][] directions = { { -1, -1 }, { -1, 0 }, { -1, 1 }, { 0, -1 }, { 0, 1 }, { 1, -1 }, { 1, 0 }, { 1, 1 } };
 
-        for ( int[] dir : directions ) {
+        for (int[] dir : directions) {
             int newRow = row + dir[0];
             int newCol = col + dir[1];
 
-            if ( newRow >= 0 && newRow < GRID_SIZE && newCol >= 0 && newCol < GRID_SIZE ) {
-                neighbors.add( cells[newRow][newCol] );
+            if (newRow >= 0 && newRow < GRID_SIZE && newCol >= 0 && newCol < GRID_SIZE) {
+                neighbors.add(cells[newRow][newCol]);
             }
         }
         return neighbors;
@@ -153,11 +153,11 @@ public class World {
      * @return A list of empty Cell objects that are direct neighbors of the
      *         specified cell.
      */
-    public List<Cell> getEmptyNeighboringCells( int row, int col ) {
+    public List<Cell> getEmptyNeighboringCells(int row, int col) {
 
-        return getNeighboringCells( row, col ).stream()
-                .filter( cell -> cell.getOccupant() == null )
-                .collect( Collectors.toList() );
+        return getNeighboringCells(row, col).stream()
+                .filter(cell -> cell.getOccupant() == null)
+                .collect(Collectors.toList());
     }
 
     /**
@@ -170,30 +170,34 @@ public class World {
      * @return A list of Cell objects that are neighbors of the specified cell and
      *         contain occupants of the specified type.
      */
-    public List<Cell> getNeighboringCellsOfType( int row, int col, Class<?> type ) {
+    public List<Cell> getNeighboringCellsOfType(int row, int col, Class<?> type) {
 
-        return getNeighboringCells( row, col ).stream()
-                .filter( cell -> type.isInstance( cell.getOccupant() ) )
-                .collect( Collectors.toList() );
+        return getNeighboringCells(row, col).stream()
+                .filter(cell -> type.isInstance(cell.getOccupant()))
+                .collect(Collectors.toList());
     }
 
     /**
-     * Retrieves all possible moves from a given cell, considering the entire grid.
-     * 
+     * Retrieves all <i>theoretically</i> possible moves for a given cell location
+     * within the grid bounds.
+     * This method is ignorant of the cell's current occupant or the types of
+     * occupants in the neighboring cells.
+     * It purely calculates based on the position within the grid.
+     *
      * @param row The row index of the starting cell.
      * @param col The column index of the starting cell.
-     * @return A list of integer arrays, each representing a possible move as
-     *         [newRow, newCol].
+     * @return A list of integer arrays, with each array representing a potential
+     *         move as [newRow, newCol].
      */
-    public List<int[]> getAllPossibleMoves( int row, int col ) {
+    public List<int[]> getAllPossibleMoves(int row, int col) {
         List<int[]> possibleMoves = new ArrayList<>();
         int[][] directions = { { -1, -1 }, { -1, 0 }, { -1, 1 }, { 0, -1 }, { 0, 1 }, { 1, -1 }, { 1, 0 }, { 1, 1 } };
 
-        for ( int[] dir : directions ) {
+        for (int[] dir : directions) {
             int newRow = row + dir[0];
             int newCol = col + dir[1];
 
-            if ( newRow >= 0 && newRow < GRID_SIZE && newCol >= 0 && newCol < GRID_SIZE ) {
+            if (newRow >= 0 && newRow < GRID_SIZE && newCol >= 0 && newCol < GRID_SIZE) {
                 possibleMoves.add(new int[] { newRow, newCol });
             }
         }
@@ -210,16 +214,16 @@ public class World {
      * @return An array of integers representing the row and column movement
      *         required to reach the target cell from the current cell.
      */
-    public int[] getDirectionForCell( Cell targetCell, int currentRow, int currentCol ) {
+    public int[] getDirectionForCell(Cell targetCell, int currentRow, int currentCol) {
 
-        for ( int dRow = -1; dRow <= 1; dRow++ ) {
+        for (int dRow = -1; dRow <= 1; dRow++) {
 
-            for ( int dCol = -1; dCol <= 1; dCol++ ) {
+            for (int dCol = -1; dCol <= 1; dCol++) {
 
-                if ( currentRow + dRow >= 0 && currentRow + dRow < GRID_SIZE && currentCol + dCol >= 0
-                        && currentCol + dCol < GRID_SIZE ) {
+                if (currentRow + dRow >= 0 && currentRow + dRow < GRID_SIZE && currentCol + dCol >= 0
+                        && currentCol + dCol < GRID_SIZE) {
 
-                    if ( cells[currentRow + dRow][currentCol + dCol] == targetCell ) {
+                    if (cells[currentRow + dRow][currentCol + dCol] == targetCell) {
 
                         return new int[] { dRow, dCol };
                     }
@@ -230,40 +234,42 @@ public class World {
     }
 
     /**
-     * Iterates through all cells in the world, removing any occupants that are no
-     * longer alive.
-     * This method is typically used at the end of a turn to clean up the world
-     * state.
+     * Iterates through all cells within the world, removing organisms that are not
+     * alive.
+     * This cleaning process ensures that dead organisms do not remain on the grid,
+     * simulating the decomposition process.
      */
     public void compostAllDead() {
 
-        for ( int i = 0; i < GRID_SIZE; i++ ) {
+        for (int i = 0; i < GRID_SIZE; i++) {
 
-            for ( int j = 0; j < GRID_SIZE; j++ ) {
+            for (int j = 0; j < GRID_SIZE; j++) {
 
                 Cell cell = cells[i][j];
 
-                if ( cell.getOccupant() != null && !cell.getOccupant().getLifeStatus() ) {
+                if (cell.getOccupant() != null && !cell.getOccupant().getLifeStatus()) {
 
-                    cell.setOccupant( null );
+                    cell.setOccupant(null);
                 }
             }
         }
     }
 
     /**
-     * Advances the state of the game by one tick.
-     * Updates the list of organisms, then iterates through them to invoke their
-     * move and reproduce behaviors. Finally, it clears out any dead organisms from
-     * the world.
+     * Progresses the game state by one turn.
+     * First, it refreshes the list of organisms to reflect the current state.
+     * Each organism is then given a chance to act: increasing its hunger, moving,
+     * and potentially reproducing based on its specific logic.
+     * Finally, the world is cleansed of any organisms that have died during the
+     * tick.
      */
     public void advanceGame() {
         refreshOrganismsList();
 
-        for ( Organism organism : new ArrayList<>( organisms ) ) {
+        for (Organism organism : new ArrayList<>(organisms)) {
             organism.incrementHunger();
-            organism.move( this );
-            organism.reproduce( this );
+            organism.move(this);
+            organism.reproduce(this);
         }
 
         compostAllDead();

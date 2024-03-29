@@ -21,36 +21,37 @@ public abstract class Organism {
     }
 
     /**
-     * Represents the ability of the organism to move within the game world.
-     * The implementation of this method will depend on the type of organism.
-     * For example, herbivores might move towards food, while plants do not move.
+     * Abstract method that defines how an organism moves within the game world. The
+     * actual movement logic is implemented in subclasses based on the type of
+     * organism.
      *
-     * @param world The world in which the organism exists. This provides the context needed for movement.
+     * @param world The world in which the organism exists, providing the necessary
+     *              context for movement decisions.
      */
-    public abstract void move( World world );
+    public abstract void move(World world);
 
     /**
-     * Represents the organism's ability to reproduce. Different organisms will
-     * have different conditions and methods for reproduction.
-     * For instance, plants might seed nearby empty cells, while herbivores could have other mechanisms.
+     * Abstract method that defines the reproduction behavior of an organism.
+     * Subclasses implement this method based on their specific reproduction
+     * mechanisms.
      *
-     * @param world The world in which the organism exists. This provides the context needed for reproduction.
+     * @param world The world in which the organism exists, offering the context
+     *              needed for finding suitable reproduction conditions.
      */
-    public abstract void reproduce( World world );
+    public abstract void reproduce(World world);
 
-
-    /*
-     * Abstract method for each Organism to "get" their colour when requested.
+    /**
+     * Abstract method to retrieve the color representation of the organism.
      */
     public abstract Color getColor();
 
-
-    /*
-     * Abstract method to return the status of whether or not an organism is alive.
+    /**
+     * Abstract method to check if the organism is alive.
      */
     public abstract boolean getLifeStatus();
 
-
+    /**
+     * Abstract method to increment the hunger level of the organism.
+     */
     public abstract void incrementHunger();
 }
-
