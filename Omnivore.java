@@ -1,18 +1,20 @@
-// Carnivore.java
+// Omnivore.java 
 
 import java.awt.Color;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Carnivore extends Organism implements omnivoreEdible {
+public class Omnivore extends Organism implements carnivoreEdible {
 
     private int MAX_HUNGER = 5;
 
     /**
-     * Moves the carnivore to a new location based on available moves that meet its
+     * Moves the herbivore to a new location based on available moves that meet its
      * conditions for movement and feeding. 
      * <p>
-     * The carnivore looks for empty cells or cells containing carnivoreEdible organisms to move into.
+     * The herbivore looks for empty cells or
+     * <p>
+     * cells containing herbivoreEdible organisms to move into.
      * Increases the hunger level with each move and checks if the hunger level
      * exceeds the maximum hunger threshold, at which point the herbivore dies.
      * 
@@ -24,7 +26,6 @@ public class Carnivore extends Organism implements omnivoreEdible {
     public void move( World world ) {
 
         // incrementHunger();
-
 
         if (!this.alive)
             return;
@@ -39,8 +40,8 @@ public class Carnivore extends Organism implements omnivoreEdible {
 
         List<int[]> possibleMoves = allPossibleMoves.stream()
                 .filter( move -> {
-                    Organism perhapsASausage = world.getCellOccupant( move[0], move[1] );
-                    return perhapsASausage == null || perhapsASausage instanceof carnivoreEdible;
+                    Organism perhapsAFood = world.getCellOccupant( move[0], move[1] );
+                    return perhapsAFood == null || perhapsAFood instanceof omnivoreEdible;
                 } )
                 .collect( Collectors.toList() );
 
@@ -51,10 +52,10 @@ public class Carnivore extends Organism implements omnivoreEdible {
 
             this.eat(world.getCellOccupant( moveTo[0], moveTo[1] ) );
             world.moveOrganism( this, moveTo[0], moveTo[1] );
-            // hunger++;
-            
-        // } else {
-        //     hunger++;
+
+            if ( hunger >= MAX_HUNGER ) {
+                this.alive = false;
+            }
         }
     }
 
@@ -68,7 +69,7 @@ public class Carnivore extends Organism implements omnivoreEdible {
      */
     private void eat( Organism organism ) {
 
-        if ( organism instanceof carnivoreEdible ) {
+        if ( organism instanceof omnivoreEdible ) {
             this.hunger = 0;
         }
     }
@@ -91,7 +92,7 @@ public class Carnivore extends Organism implements omnivoreEdible {
      */
     @Override
     public Color getColor() {
-        return GUI.RED;
+        return GUI.BLUE;
     }
 
     /**
@@ -117,18 +118,18 @@ public class Carnivore extends Organism implements omnivoreEdible {
         int currentCol = location[1];
 
         List<Cell> emptyNeighbors = world.getEmptyNeighboringCells( currentRow, currentCol );
-        List<Cell> potentialMates = world.getNeighboringCellsOfType( currentRow, currentCol, Carnivore.class );
+        List<Cell> potentialMates = world.getNeighboringCellsOfType( currentRow, currentCol, Omnivore.class );
         List<Cell> potentialFood1 = world.getNeighboringCellsOfType( currentRow, currentCol, Herbivore.class );
-        List<Cell> potentialFood2 = world.getNeighboringCellsOfType( currentRow, currentCol, Omnivore.class );
+        List<Cell> potentialFood2 = world.getNeighboringCellsOfType( currentRow, currentCol, Carnivore.class );
+        List<Cell> potentialFood3 = world.getNeighboringCellsOfType( currentRow, currentCol, Plant.class );
 
-
-        if ( !emptyNeighbors.isEmpty() && emptyNeighbors.size() >= 3 && potentialMates.size() >= 1 && ( ( potentialFood1.size() + potentialFood2.size() ) >= 2 ) ) {
+        if ( !emptyNeighbors.isEmpty() && emptyNeighbors.size() >= 3 && potentialMates.size() >= 1 && ( ( potentialFood1.size() + potentialFood2.size() + potentialFood3.size() ) >= 2 ) ) {
 
             int index = RandomGenerator.nextNumber( emptyNeighbors.size() );
             Cell targetCell = emptyNeighbors.get( index );
             int[] newLocation = world.getDirectionForCell( targetCell, currentRow, currentCol );
 
-            world.setCellOccupant( currentRow + newLocation[0], currentCol + newLocation[1], new Carnivore() );
+            world.setCellOccupant( currentRow + newLocation[0], currentCol + newLocation[1], new Omnivore() );
 
         }
     }
@@ -136,9 +137,6 @@ public class Carnivore extends Organism implements omnivoreEdible {
     @Override
     public void incrementHunger() {
         hunger++;
-        if ( hunger >= MAX_HUNGER ) {
-            this.alive = false;
-        }
     }
     
 }

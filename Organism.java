@@ -49,5 +49,8 @@ public abstract class Organism {
      * Abstract method to return the status of whether or not an organism is alive.
      */
     public abstract boolean getLifeStatus();
+
+
+    public abstract void incrementHunger();
 }
 

@@ -68,6 +68,7 @@ public class World {
                 if ( cell.getOccupant() != null ) {
 
                     organisms.add( cell.getOccupant() );
+
                 }
             }
         }
@@ -111,7 +112,7 @@ public class World {
             for ( int j = 0; j < GRID_SIZE; j++ ) {
 
                 if ( cells[i][j].getOccupant() == organism ) {
-
+                    
                     cells[i][j].setOccupant( null );
                     cells[newRow][newCol].setOccupant( organism );
 
@@ -260,6 +261,7 @@ public class World {
         refreshOrganismsList();
 
         for ( Organism organism : new ArrayList<>( organisms ) ) {
+            organism.incrementHunger();
             organism.move( this );
             organism.reproduce( this );
         }

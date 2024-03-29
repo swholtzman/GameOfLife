@@ -16,9 +16,11 @@ public class GUI {
     static final int GRID_SIZE = World.GRID_SIZE;
     static final int CELL_SIZE = World.GRID_SIZE;
 
-    static final Color GREEN = Color.GREEN;
-    static final Color YELLOW = Color.YELLOW;
-    static final Color LIGHT_BROWN = new Color( 210, 180, 140 );
+    static final Color GREEN = new Color( 91, 146, 121 );
+    static final Color YELLOW = new Color( 243, 201, 105 );
+    static final Color RED = new Color( 135, 61, 72 );
+    static final Color BLUE = new Color( 78, 118, 166 );
+    static final Color LIGHT_BROWN = new Color( 205, 178, 162 );
 
     private JPanel gamePanel;
 
@@ -43,7 +45,7 @@ public class GUI {
             for ( int j = 0; j < GRID_SIZE; j++ ) {
                 JPanel cellPanel = new JPanel();
                 cellPanel.setPreferredSize( new Dimension( CELL_SIZE, CELL_SIZE ) );
-                cellPanel.setBorder( BorderFactory.createLineBorder( Color.WHITE ) );
+                cellPanel.setBorder( BorderFactory.createLineBorder( LIGHT_BROWN ) );
                 gamePanel.add( cellPanel );
 
             }

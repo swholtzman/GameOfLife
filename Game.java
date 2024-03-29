@@ -14,7 +14,7 @@ public class Game {
      * populating the world.
      */
     Game() {
-        gui = new GUI( this );
+        gui = new GUI(this);
         world = new World();
         initializeWorld();
     }
@@ -25,22 +25,30 @@ public class Game {
      */
     private void initializeWorld() {
 
-        for ( int i = 0; i < World.GRID_SIZE; i++ ) {
+        for (int i = 0; i < World.GRID_SIZE; i++) {
 
-            for ( int j = 0; j < World.GRID_SIZE; j++ ) {
-                int randNum = RandomGenerator.nextNumber( 100 );
+            for (int j = 0; j < World.GRID_SIZE; j++) {
+                int randNum = RandomGenerator.nextNumber(100);
 
-                if ( randNum >= 85 ) {
-                    world.setCellOccupant( i, j, new Herbivore() );
-                    gui.setCellColor( i, j, GUI.YELLOW );
+                if (randNum >= 80) {
+                    world.setCellOccupant(i, j, new Herbivore());
+                    gui.setCellColor(i, j, GUI.YELLOW);
 
-                } else if ( randNum >= 65 ) {
-                    world.setCellOccupant( i, j, new Plant() );
-                    gui.setCellColor( i, j, GUI.GREEN );
+                } else if (randNum >= 60) {
+                    world.setCellOccupant(i, j, new Plant());
+                    gui.setCellColor(i, j, GUI.GREEN);
+
+                } else if (randNum >= 50) {
+                    world.setCellOccupant(i, j, new Carnivore());
+                    gui.setCellColor(i, j, GUI.RED);
+
+                } else if (randNum >= 45) {
+                    world.setCellOccupant(i, j, new Omnivore());
+                    gui.setCellColor(i, j, GUI.BLUE);
 
                 } else {
-                    world.setCellOccupant( i, j, null );
-                    gui.setCellColor( i, j, GUI.LIGHT_BROWN );
+                    world.setCellOccupant(i, j, null);
+                    gui.setCellColor(i, j, GUI.LIGHT_BROWN);
                 }
             }
         }
@@ -62,11 +70,8 @@ public class Game {
      */
     public void advanceGame() {
         world.advanceGame(); // Advances all organisms in the world
-    
+
         turns++;
     }
-
-    
-    
 
 }

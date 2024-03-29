@@ -9,7 +9,7 @@ import java.awt.Color;
  * This class extends Organism and implements the herbivoreEdible interface,
  * indicating that they can be consumed by herbivores.
  */
-public class Plant extends Organism implements herbivoreEdible {
+public class Plant extends Organism implements herbivoreEdible, omnivoreEdible {
 
     /**
      * Constructs a new Plant instance.
@@ -55,7 +55,7 @@ public class Plant extends Organism implements herbivoreEdible {
         List<Cell> emptyNeighbors = world.getEmptyNeighboringCells( currentRow, currentCol );
         List<Cell> neighboringPlants = world.getNeighboringCellsOfType( currentRow, currentCol, Plant.class );
 
-        if ( !emptyNeighbors.isEmpty() && emptyNeighbors.size() >= 3 && neighboringPlants.size() == 4 ) {
+        if ( !emptyNeighbors.isEmpty() && emptyNeighbors.size() >= 3 && neighboringPlants.size() >= 2 ) {
 
             int index = RandomGenerator.nextNumber( emptyNeighbors.size() );
             Cell targetCell = emptyNeighbors.get( index );
@@ -85,5 +85,10 @@ public class Plant extends Organism implements herbivoreEdible {
     @Override
     public Color getColor() {
         return GUI.GREEN;
+    }
+
+    @Override
+    public void incrementHunger() {
+
     }
 }
