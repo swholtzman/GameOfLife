@@ -94,7 +94,7 @@ public class Herbivore extends Organism implements carnivoreEdible, omnivoreEdib
 
         List<Cell> emptyNeighbors = world.getEmptyNeighboringCells(currentRow, currentCol);
         List<Cell> potentialMates = world.getNeighboringCellsOfType(currentRow, currentCol, Herbivore.class);
-        List<Cell> potentialFood = world.getNeighboringCellsOfType(currentRow, currentCol, Plant.class);
+        List<Cell> potentialFood = world.getNeighboringCellsOfType(currentRow, currentCol, herbivoreEdible.class);
 
         if (!emptyNeighbors.isEmpty() && emptyNeighbors.size() >= 2 && potentialMates.size() >= 1
                 && potentialFood.size() >= 2) {

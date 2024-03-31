@@ -122,11 +122,10 @@ public class Carnivore extends Organism implements omnivoreEdible {
 
         List<Cell> emptyNeighbors = world.getEmptyNeighboringCells(currentRow, currentCol);
         List<Cell> potentialMates = world.getNeighboringCellsOfType(currentRow, currentCol, Carnivore.class);
-        List<Cell> potentialFood1 = world.getNeighboringCellsOfType(currentRow, currentCol, Herbivore.class);
-        List<Cell> potentialFood2 = world.getNeighboringCellsOfType(currentRow, currentCol, Omnivore.class);
+        List<Cell> potentialFood = world.getNeighboringCellsOfType(currentRow, currentCol, carnivoreEdible.class);
 
         if (!emptyNeighbors.isEmpty() && emptyNeighbors.size() >= 3 && potentialMates.size() >= 1
-                && ((potentialFood1.size() + potentialFood2.size()) >= 2)) {
+                && (potentialFood.size() >= 2)) {
 
             int index = RandomGenerator.nextNumber(emptyNeighbors.size());
             Cell targetCell = emptyNeighbors.get(index);
